@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); // Add support for controllers
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<WeatherForecastService>(); // Register the service
+builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<ClientService>();
 
 var app = builder.Build();
 
