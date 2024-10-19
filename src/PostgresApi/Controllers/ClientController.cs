@@ -19,7 +19,11 @@ public class ClientController(ClientService clientService) : ControllerBase
     public ActionResult<Client> Get(string id)
     {
         var client = clientService.Get(id);
-        return Ok(client);
+        if (client == null)
+        {
+            return NotFound(); // Return 404 if not found
+        }
+        return Ok(client); // Return 200 with client data
     }
 
     [HttpPost]
@@ -33,7 +37,7 @@ public class ClientController(ClientService clientService) : ControllerBase
     public ActionResult Delete(string id)
     {
         var success = clientService.Delete(id);
-        if (!success) return BadRequest();
+        if (!success) return NotFound();
         return Ok();
     }
 }

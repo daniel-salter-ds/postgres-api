@@ -4,9 +4,14 @@ namespace PostgresApi.Services;
 
 public class ClientService
 {
-    public Client Get(string id)
+    public Client? Get(string id)
     {
-        return new Client(id, "Name");
+        // Simulate a lookup that could fail
+        if (id == "Id1")
+        {
+            return new Client(id, "Name");
+        }
+        return null; // Return null if not found
     }
     public IEnumerable<Client> List()
     {
@@ -23,6 +28,7 @@ public class ClientService
 
     public bool Delete(string id)
     {
-        return true;
+        // Simulate deletion logic
+        return id == "Id1"; // Return true for success, false otherwise
     }
 }
