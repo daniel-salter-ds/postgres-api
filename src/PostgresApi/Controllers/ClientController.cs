@@ -8,15 +8,32 @@ namespace PostgresApi.Controllers;
 [Route("api/[controller]")]
 public class ClientController(ClientService clientService) : ControllerBase
 {
-    [HttpGet("{id}")]
-    public Client Get(string id)
+    [HttpGet]
+    public ActionResult<IEnumerable<Client>> List()
     {
-        return clientService.Get(id);
+        var clients = clientService.List();
+        return Ok(clients);
     }
     
-    [HttpGet]
-    public IEnumerable<Client> List()
+    [HttpGet("{id}")]
+    public ActionResult<Client> Get(string id)
     {
-        return clientService.List();
+        var client = clientService.Get(id);
+        return Ok(client);
+    }
+
+    [HttpPost]
+    public ActionResult<Client> Upsert([FromBody] Client client)
+    {
+        var clientResult = clientService.Upsert(client);
+        return Ok(clientResult);
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult Delete(string id)
+    {
+        var success = clientService.Delete(id);
+        if (!success) return BadRequest();
+        return Ok();
     }
 }

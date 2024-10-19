@@ -15,4 +15,14 @@ public class ClientService
             new Client("Id2", "Different Name")
         ];
     }
+
+    public Client Upsert(Client client)
+    {
+        return client;
+    }
+
+    public bool Delete(string id)
+    {
+        return true;
+    }
 }
