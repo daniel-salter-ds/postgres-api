@@ -4,6 +4,10 @@ namespace PostgresApi.Services;
 
 public class ClientService
 {
+    public Client Get(string id)
+    {
+        return new Client(id, "Name");
+    }
     public IEnumerable<Client> List()
     {
         return [
