@@ -6,19 +6,19 @@ namespace PostgresApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ClientController(ClientService clientService) : ControllerBase
+public class ClientsController(ClientsService clientsService) : ControllerBase
 {
     [HttpGet]
     public ActionResult<IEnumerable<Client>> List()
     {
-        var clients = clientService.List();
+        var clients = clientsService.List();
         return Ok(clients);
     }
     
     [HttpGet("{id}")]
     public ActionResult<Client> Get(string id)
     {
-        var client = clientService.Get(id);
+        var client = clientsService.Get(id);
         if (client == null)
         {
             return NotFound(); // Return 404 if not found
@@ -29,14 +29,14 @@ public class ClientController(ClientService clientService) : ControllerBase
     [HttpPost]
     public ActionResult<Client> Upsert([FromBody] Client client)
     {
-        var clientResult = clientService.Upsert(client);
+        var clientResult = clientsService.Upsert(client);
         return Ok(clientResult);
     }
 
     [HttpDelete("{id}")]
     public ActionResult Delete(string id)
     {
-        var success = clientService.Delete(id);
+        var success = clientsService.Delete(id);
         if (!success) return NotFound();
         return Ok();
     }

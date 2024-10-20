@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 
 // Add resource-specific services
 builder.Services.AddScoped<WeatherForecastService>();
-builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<ClientsService>();
 
 
 // ----- Configure application -----
